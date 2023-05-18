@@ -2,6 +2,21 @@
 Changelog for package jackal_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.4 (2023-04-20)
+------------------
+* [jackal_description] Changed the output type of the gazebo_ros_ray_sensor to LaserScan.
+* Contributors: Tony Baltovski
+
+1.0.3 (2023-02-08)
+------------------
+* Fixed gazebo_ros_laser plugin
+* Contributors: Roni Kreinin
+
+1.0.2 (2023-02-02)
+------------------
+* Add missing dependency to velodyne_description.
+* Contributors: Joey Yang
+
 1.0.1 (2022-10-14)
 ------------------
 

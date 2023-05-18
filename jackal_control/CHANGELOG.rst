@@ -2,6 +2,19 @@
 Changelog for package jackal_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.4 (2023-04-20)
+------------------
+* Remove gravitational acceleration in ekf_node
+* Contributors: Roni Kreinin
+
+1.0.3 (2023-02-08)
+------------------
+
+1.0.2 (2023-02-02)
+------------------
+* Uncomment dependency on imu_filter_madgwick; it is now installable as a deb in Foxy.
+* Contributors: Joey Yang
+
 1.0.1 (2022-10-14)
 ------------------
 * [jackal_control] Fixed wrong dependency.
