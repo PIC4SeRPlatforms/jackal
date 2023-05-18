@@ -296,5 +296,6 @@
   <xacro:include filename="$(find jackal_description)/urdf/accessories.urdf.xacro" />
 
   <!-- Optional custom includes. -->
-  <xacro:include filename="$(optenv JACKAL_URDF_EXTRAS empty.urdf)" />
+  <!-- <xacro:include filename="$(optenv JACKAL_URDF_EXTRAS empty.urdf)" /> -->
+  <xacro:include filename="$(find jackal_description)/urdf/sensors_pic4ser.urdf" />
 </robot>

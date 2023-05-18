@@ -1,15 +1,23 @@
 twist_mux:
   ros__parameters:
     topics:
+      remote_joypad:
+        topic   : taranis/cmd_vel
+        timeout : 0.5
+        priority: 10
       joy:
         topic   : joy_teleop/cmd_vel
         timeout : 0.5
-        priority: 10
+        priority: 9
       interactive_marker:
         topic   : twist_marker_server/cmd_vel
         timeout : 0.5
         priority: 8
       external:
+        topic   : external/cmd_vel
+        timeout : 0.5
+        priority: 2
+      external2:
         topic   : cmd_vel
         timeout : 0.5
         priority: 1

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot name="jackal" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- This file is a placeholder which is included by default from
+       jackal.urdf.xacro. If a robot is being customized and requires
+       additional URDF, set the JACKAL_URDF_EXTRAS environment variable
+       to the full path of the file you would like included. -->
+
+  <xacro:arg name="laser_enabled" default="true" />
+  <xacro:arg name="laser_xyz" default="$(optenv JACKAL_LMS1XX_XYZ -0.12 0.0 0.2)" />
+  <xacro:arg name="laser_rpy" default="$(optenv JACKAL_LMS1XX_RPY 0.0 0.0 0.0)" />
+  <xacro:arg name="laser_mount" default="$(optenv JACKAL_LASER_MOUNT_FRAME mid_mount)" />
+  <xacro:arg name="laser_frame_id" default="$(optenv JACKAL_LASER_FRAME laser)" />
+
+  <xacro:arg name="t265_enabled" default="true" />
+  <xacro:arg name="t265_xyz" default="$(optenv JACKAL_T265_XYZ 0.17 0.0 0.035)" />
+  <xacro:arg name="t265_rpy" default="$(optenv JACKAL_T265_RPY 0.0 0.0 0.0)" />
+  <xacro:arg name="t265_mount" default="$(optenv JACKAL_T265_MOUNT_FRAME mid_mount)" />
+  <xacro:arg name="t265_frame_id" default="$(optenv JACKAL_T265_FRAME t265_base_frame)" />
+
+
+  <xacro:if value="$(arg laser_enabled)">
+    <link name="$(arg laser_frame_id)">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <!-- Origin of this mesh is the base of the bracket. -->
+          <mesh filename="file://$(find jackal_description)/meshes/accessories/hokuyo_ust10.stl" />
+        </geometry>
+        <material name="dark_grey" />
+      </visual>
+    </link>
+
+    <joint name="laser_mount_joint" type="fixed">
+      <origin xyz="$(arg laser_xyz)" rpy="$(arg laser_rpy)" />
+      <parent link="$(arg laser_mount)" />
+      <child link="$(arg laser_frame_id)" />
+    </joint>
+  </xacro:if>
+
+
+  <xacro:if value="$(arg t265_enabled)">
+
+    <joint name="t265_mount_joint" type="fixed">
+      <origin xyz="$(arg t265_xyz)" rpy="$(arg t265_rpy)" />
+      <parent link="$(arg t265_mount)" />
+      <child link="$(arg t265_frame_id)" />
+    </joint>
+    <link name="$(arg t265_frame_id)">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <!-- Origin of this mesh is the base of the bracket. -->
+          <box size="0.1 0.1 0.1" />
+        </geometry>
+        <material name="dark_grey" />
+      </visual>
+    </link>
+
+    <joint name="t265_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="$(arg t265_frame_id)" />
+      <child link="t265_optical_frame" />
+    </joint>
+    <link name="t265_optical_frame" />
+
+  </xacro:if>
+
+</robot>
