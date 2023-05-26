@@ -100,8 +100,18 @@
   <joint name="base_link_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="base_link"/>
+    <child link="base_footprint" />
+  </joint>
+
+  <link name="base_footprint"></link>
+
+  <joint name="footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_footprint"/>
     <child link="chassis_link" />
   </joint>
+
+
 
   <link name="chassis_link">
     <visual>
@@ -203,6 +213,7 @@
        to supply the joint between it and imu_link. This is important so that imu_link
        always points to the "active" IMU. When an upgrade IMU is connected, the
        internal_imu_link should remain, but imu_link should point to the upgrade one. -->
+
   <link name="imu_link">
     <inertial>
       <mass value="0.001"/>
