@@ -106,7 +106,7 @@
      </sensor>
   </gazebo>
 
-  <xacro:if value="$(optenv JACKAL_WHEEL_SLIP 0)">
+  <xacro:if value="$(arg wheel_slip)">
     <gazebo>
       <plugin filename="libgazebo_ros_wheel_slip.so" name="wheels_slip">
         <wheel link_name="front_left_wheel_link">

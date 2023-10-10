@@ -22,6 +22,8 @@
 
   <xacro:property name="mount_spacing" value="0.120" />
 
+  <xacro:arg name="wheel_slip" default="$(optenv JACKAL_WHEEL_SLIP 1)" />
+
   <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
   <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
   <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
@@ -54,14 +56,19 @@
     </link>
 
     <gazebo reference="${prefix}_wheel_link">
-      <material>Gazebo/DarkGrey</material>
-      <selfCollide>false</selfCollide>
-      <mu1 value="0.5"/>
-      <mu2 value="0.5"/>
-      <!-- <kp value="10000000.0" />
-      <kd value="1" /> -->
-      <fdir1 value="1 0 0"/>
+      <material>Gazebo/DarkGrey</material>     
     </gazebo>
+
+    <xacro:unless value="$(arg wheel_slip)">
+      <gazebo reference="${prefix}_wheel_link">
+        <selfCollide>false</selfCollide>
+        <mu1 value="1.0"/>
+        <mu2 value="0.5"/>
+        <kp value="10000000.0" />
+        <kd value="1" />
+        <fdir1 value="1 0 0"/> 
+      </gazebo>
+    </xacro:unless>
 
     <joint name="${prefix}_wheel_joint" type="continuous">
       <parent link="chassis_link"/>
@@ -120,12 +127,12 @@
     </collision>
     <inertial>
       <!-- Center of mass -->
-      <origin xyz="0.012  0.002 0.067" rpy="0 0 0"/>
+      <origin xyz="0.0 0.0 0.067" rpy="0 0 0"/>
       <mass value="16.523"/>
       <!-- Moments of inertia: ( chassis without wheels ) -->
       <inertia
-        ixx="0.3136" ixy="-0.0008" ixz="0.0164"
-        iyy="0.3922" iyz="-0.0009"
+        ixx="0.3136" ixy="0.0" ixz="0.0"
+        iyy="0.3922" iyz="0.0"
         izz="0.4485"/>
       </inertial>
   </link>
