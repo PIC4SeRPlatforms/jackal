@@ -17,6 +17,10 @@
   <xacro:arg name="t265_mount" default="$(optenv JACKAL_T265_MOUNT_FRAME mid_mount)" />
   <xacro:arg name="t265_frame_id" default="$(optenv JACKAL_T265_FRAME t265_base_frame)" />
 
+  <xacro:arg name="mocap_mount" default="$(optenv JACKAL_MOCAP_MOUNT_FRAME mid_mount)" />
+  <xacro:arg name="mocap_frame_id" default="$(optenv JACKAL_MOCAP_FRAME base_mocap)" />
+  <xacro:arg name="mocap_xyz" default="$(optenv JACKAL_MOCAP_XYZ 0.0 0.0 0.0)" />
+  <xacro:arg name="mocap_rpy" default="$(optenv JACKAL_MOCAP_RPY 0.0 0.0 0.0)" />
 
   <xacro:if value="$(arg laser_enabled)">
     <link name="$(arg laser_frame_id)">
@@ -64,5 +68,13 @@
     <link name="t265_optical_frame" />
 
   </xacro:if>
+
+  <link name="$(arg mocap_frame_id)" />
+
+  <joint name="base_mocap_joint" type="fixed">
+    <origin xyz="$(arg mocap_xyz)" rpy="$(arg mocap_rpy)" />
+    <parent link="$(arg mocap_mount)" />
+    <child link="$(arg mocap_frame_id)" />
+  </joint>
 
 </robot>
