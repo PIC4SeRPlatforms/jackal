@@ -9,23 +9,19 @@ from launch_ros.substitutions import FindPackageShare
 import re
 
 
-def launch_robot_description(context, ld, robot_description_parameter: ParameterValue):
+def launch_robot_description(context, robot_description_parameter: ParameterValue):
     robot_description = robot_description_parameter.evaluate(context)
     print(type(robot_description))
     pattern = r"<!--(.*?)-->"
     robot_description_content = re.sub(pattern, "", robot_description, flags=re.DOTALL)
 
-    ld.add_action(
-        Node(
-            package="robot_state_publisher",
-            executable="robot_state_publisher",
-            parameters=[
-                {
-                    "robot_description": robot_description_content,
-                }
-            ],
-        )
+    rsp = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        parameters=[{"robot_description": robot_description_content}],
     )
+
+    return [rsp]
 
 
 def generate_launch_description():
@@ -51,5 +47,5 @@ def generate_launch_description():
     # )
 
     ld.add_action(robot_description_command_arg)
-    ld.add_action(OpaqueFunction(function=launch_robot_description, args=[ld, robot_description_parameter]))
+    ld.add_action(OpaqueFunction(function=launch_robot_description, args=[robot_description_parameter]))
     return ld
