@@ -220,8 +220,8 @@
   <xacro:if value="${d435 or d435_stereo}">
     <xacro:property name="name" value="$(optenv JACKAL_D435_NAME front)" />
     <xacro:property name="mount" value="$(optenv JACKAL_D435_MOUNT front)" />
-    <xacro:property name="camera_xyz" default="$(optenv JACKALD435_XYZ 0.042 0.0 0.0)" />
-    <xacro:property name="camera_rpy" default="$(optenv JACKALD435_RPY 0.0 0.0 0.0)" />
+    <xacro:property name="camera_xyz" default="$(optenv JACKAL_D435_XYZ 0.042 0.0 0.0)" />
+    <xacro:property name="camera_rpy" default="$(optenv JACKAL_D435_RPY 0.0 0.0 0.0)" />
     <xacro:property name="prefix" value="$(optenv JACKAL_D435_PREFIX ${mount})" />
     <xacro:property name="parent" value="$(optenv JACKAL_D435_PARENT ${mount}_mount)" />
     <xacro:property name="camera_frame_id" value="$(optenv JACKAL_D435_FRAME camera_color_frame)" />
