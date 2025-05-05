@@ -4,6 +4,8 @@
   <xacro:arg name="isaac_sim" default="False" />
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="use_gazebo_controllers" default="True" />
+  <xacro:arg name="use_collision_sensor" default="False" />
+  <xacro:arg name="use_lidar_gpu" default="True" />
   <xacro:arg name="gazebo_controllers" default="$(find jackal_control)/config/control.yaml" />
   <xacro:property name="PI" value="3.1415926535897931" />
 
@@ -29,6 +31,9 @@
   <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
   <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+
+  <xacro:property name="use_lidar_gpu" value="$(arg use_lidar_gpu)" />
+  <xacro:property name="lidar_type" value="${'gpu_ray' if use_lidar_gpu else 'ray'}" />
 
   <xacro:macro name="wheel" params="prefix *joint_pose">
 
@@ -137,6 +142,23 @@
         izz="0.4485"/>
       </inertial>
   </link>
+
+  <xacro:if value="$(arg use_collision_sensor)">
+    <joint name="collision_link_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="chassis_link"/>
+      <child link="collision_link" />
+    </joint>
+
+    <link name="collision_link">
+      <collision>
+        <origin xyz="0 0 ${chassis_height/2}"/>
+        <geometry>
+          <box size="${chassis_length + 0.05} ${chassis_width + 0.10} ${chassis_height}"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:if>
 
   <xacro:unless value="$(optenv JACKAL_FRONT_ACCESSORY_FENDER 0)">
     <link name="front_fender_link">

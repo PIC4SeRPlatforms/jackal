@@ -180,22 +180,29 @@
       </plugin>
     </gazebo>
   </xacro:if>
+    
+  <xacro:if value="$(arg use_collision_sensor)">
+    <gazebo reference="base_link">
+      <sensor type="contact" name="bumper">
+            <update_rate>10</update_rate>
+            <contact>
+              <collision>base_link_fixed_joint_lump__collision_link_collision_1</collision>        
+            </contact>
+            <plugin name="collision_sensor" filename="libgazebo_ros_collision.so">
+              <ros>
+                <namespace>jackal</namespace>
+              </ros>
+              <frame_name>world</frame_name>
+              <terrain_name>ground_plane</terrain_name>
+            </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:if>
 
-  <!-- <gazebo>
-    <plugin name="gazebo_ros_p3d" filename="libgazebo_ros_p3d.so">
-        <ros>
-          <namespace>/jackal</namespace>
-          <remapping>odom:=ground_truth</remapping>
-        </ros>
-        <body_name>base_link</body_name>
-        <update_rate>10</update_rate>
-      </plugin>
-  </gazebo> -->
-
-    <gazebo>
+  <gazebo>
     <plugin name="gazebo_ros_p3d" filename="libgazebo_ros_pose3d.so">
         <ros>
-          <namespace>/jackal</namespace>
+          <namespace>jackal</namespace>
           <remapping>odom:=ground_truth</remapping>
         </ros>
         <frame_name>map</frame_name>
