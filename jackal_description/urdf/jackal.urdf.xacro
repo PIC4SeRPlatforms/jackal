@@ -5,7 +5,7 @@
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="use_gazebo_controllers" default="True" />
   <xacro:arg name="use_collision_sensor" default="False" />
-  <xacro:arg name="use_lidar_gpu" default="True" />
+  <xacro:arg name="use_lidar_gpu" default="False" />
   <xacro:arg name="gazebo_controllers" default="$(find jackal_control)/config/control.yaml" />
   <xacro:property name="PI" value="3.1415926535897931" />
 
