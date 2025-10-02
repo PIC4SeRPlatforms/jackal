@@ -22,9 +22,10 @@
 
       <plugin name="people_detector_plugin" filename="libgazebo_people_detector.so">
         <ros>
-          <remapping>people_detector:=people_detector</remapping>
+          <namespace>/jackal</namespace>
+          <remapping>detected_people:=detected_people</remapping>
         </ros>
-        <frame_name>world</frame_name>
+        <frame_name>map</frame_name>
       </plugin>
     </sensor>
   </gazebo>
