@@ -25,6 +25,7 @@
           <namespace>/jackal</namespace>
           <remapping>detected_people:=detected_people</remapping>
         </ros>
+        <update_rate>30.0</update_rate>
         <frame_name>map</frame_name>
       </plugin>
     </sensor>
