@@ -40,8 +40,11 @@ def generate_launch_description():
         package='twist_mux',
         executable='twist_mux',
         output='screen',
+        # Relative remap so it resolves under the robot namespace:
+        # /<ns>/cmd_vel_out -> /<ns>/cmd_vel_unstamped (the diff-drive input).
+        # Absolute names here would break the chain when namespaced.
         remappings={
-            ('/cmd_vel_out', '/jackal_velocity_controller/cmd_vel_unstamped')},
+            ('cmd_vel_out', 'cmd_vel_unstamped')},
         parameters=[filepath_config_twist_mux],
         condition=UnlessCondition(is_sim)
     )
