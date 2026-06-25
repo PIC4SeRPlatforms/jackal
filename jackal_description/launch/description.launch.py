@@ -19,6 +19,9 @@ def launch_robot_description(context, robot_description_parameter: ParameterValu
         package="robot_state_publisher",
         executable="robot_state_publisher",
         parameters=[{"robot_description": robot_description_content}],
+        # When launched under a namespace, publish tf to /<ns>/tf (matching the
+        # namespaced Nav2 stack) instead of the global /tf.
+        remappings=[("/tf", "tf"), ("/tf_static", "tf_static")],
     )
 
     return [rsp]

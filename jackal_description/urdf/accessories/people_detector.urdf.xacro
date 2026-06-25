@@ -21,9 +21,9 @@
       <visualize>true</visualize>
       <update_rate>10</update_rate>
 
-      <plugin name="people_detector_plugin" filename="libgazebo_people_detector.so">
+      <plugin name="$(arg prefix)_people_detector_plugin" filename="libgazebo_people_detector.so">
         <ros>
-          <namespace>/jackal</namespace>
+          <namespace>$(arg prefix)</namespace>
           <remapping>detected_people:=detected_people</remapping>
         </ros>
         <frame_name>map</frame_name>

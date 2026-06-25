@@ -173,7 +173,7 @@
     <xacro:if value="$(optenv JACKAL_D435 0)">
       <gazebo reference="${camera_frame_id}">
         <sensor type="depth" name="d435">
-          <always_on>1</always_on>
+          <always_on>true</always_on>
           <update_rate>30</update_rate>
 
           <camera name="camera_color">

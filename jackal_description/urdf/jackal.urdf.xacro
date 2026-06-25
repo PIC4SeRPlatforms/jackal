@@ -2,7 +2,10 @@
 <robot name="jackal" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:arg name="gazebo_sim" default="False" />
   <xacro:arg name="isaac_sim" default="False" />
-  <xacro:arg name="prefix" default="" />
+  <!-- prefix doubles as the per-robot ROS namespace for the Gazebo plugins
+       (imu/collision/ground-truth). Fleet spawns pass prefix:=<robot name>; the
+       lone robot is treated as the first robot, "jackal". -->
+  <xacro:arg name="prefix" default="jackal" />
   <xacro:arg name="use_gazebo_controllers" default="True" />
   <xacro:arg name="use_collision_sensor" default="False" />
   <xacro:arg name="use_lidar_gpu" default="False" />

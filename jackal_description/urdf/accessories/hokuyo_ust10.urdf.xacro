@@ -39,9 +39,9 @@
               <stddev>0.01</stddev>
             </noise>
           </ray>
-          <plugin name="gazebo_ros_laser" filename="libgazebo_ros_ray_sensor.so">
+          <plugin name="$(arg prefix)_${prefix}_gazebo_ros_laser" filename="libgazebo_ros_ray_sensor.so">
             <ros>
-              <namespace>${robot_namespace}</namespace>
+              <namespace>$(arg prefix)</namespace>
               <remapping>~/out:=${topic}</remapping>
             </ros>
             <output_type>sensor_msgs/LaserScan</output_type>
